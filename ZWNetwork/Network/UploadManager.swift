@@ -12,7 +12,6 @@ import Alamofire
 
 class UploadManager {
     
-    
     static let `default` = UploadManager()
     /// 下载任务管理
     fileprivate var uploadTasks = [String: UploadTaskManager]()

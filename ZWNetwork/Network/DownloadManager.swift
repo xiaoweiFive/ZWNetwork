@@ -44,7 +44,7 @@ class DownloadManager {
         let key = cacheKey(url, parameters, cacheFilters)
         let task = downloadTasks[key]
         task?.downloadRequest?.cancel()
-        NotificationCenter.default.post(name: NSNotification.Name("DaisyDownloadCancel"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("ZWNetworkDownloadCancel"), object: nil)
     }
     
     // Cancel all tasks
@@ -148,7 +148,7 @@ class DownloadTaskManager: BaseSessionTaskManager {
          cacheFilters: Parameters? = nil) {
         key = cacheKey(url, parameters, cacheFilters)
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(downloadCancel), name: NSNotification.Name.init("DaisyDownloadCancel"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(downloadCancel), name: NSNotification.Name.init("ZWNetworkDownloadCancel"), object: nil)
         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (_) in
             self.downloadRequest?.cancel()
         }

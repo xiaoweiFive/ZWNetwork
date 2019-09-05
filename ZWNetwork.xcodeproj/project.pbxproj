@@ -22,6 +22,7 @@
 		FA58E60A231F9E0200EF2542 /* Network+Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58E609231F9E0200EF2542 /* Network+Api.swift */; };
 		FA58E60C231FAF6500EF2542 /* BaseSessionTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58E60B231FAF6500EF2542 /* BaseSessionTaskManager.swift */; };
 		FA58E60E2320E13200EF2542 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58E60D2320E13200EF2542 /* UploadManager.swift */; };
+		FA58E6102321208200EF2542 /* NetworkUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58E60F2321208200EF2542 /* NetworkUUID.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		FA58E609231F9E0200EF2542 /* Network+Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Api.swift"; sourceTree = "<group>"; };
 		FA58E60B231FAF6500EF2542 /* BaseSessionTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSessionTaskManager.swift; sourceTree = "<group>"; };
 		FA58E60D2320E13200EF2542 /* UploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
+		FA58E60F2321208200EF2542 /* NetworkUUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUUID.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,9 +112,10 @@
 		FA1A14FF231E7F7F00191582 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				FA1A1500231E7F8900191582 /* NetworkCacheKey.swift */,
-				FA1A1502231F5C4600191582 /* CacheManager.swift */,
 				FA1A1504231F5E8100191582 /* Network.swift */,
+				FA1A1500231E7F8900191582 /* NetworkCacheKey.swift */,
+				FA58E60F2321208200EF2542 /* NetworkUUID.swift */,
+				FA1A1502231F5C4600191582 /* CacheManager.swift */,
 				FA58E60B231FAF6500EF2542 /* BaseSessionTaskManager.swift */,
 				FA1A1506231F5FDF00191582 /* RequestManager.swift */,
 				FA1A1508231F600A00191582 /* DownloadManager.swift */,
@@ -243,6 +246,7 @@
 				FA1A1503231F5C4600191582 /* CacheManager.swift in Sources */,
 				FA58E60C231FAF6500EF2542 /* BaseSessionTaskManager.swift in Sources */,
 				FA1A150B231F602500191582 /* ResponseValue.swift in Sources */,
+				FA58E6102321208200EF2542 /* NetworkUUID.swift in Sources */,
 				FA1A14F0231E7F6200191582 /* ViewController.swift in Sources */,
 				FA58E60A231F9E0200EF2542 /* Network+Api.swift in Sources */,
 				FA1A1507231F5FDF00191582 /* RequestManager.swift in Sources */,

@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //示例一 data
-        Network.request("===").cache(true).cacheData(completion: { [weak self] (responseVale) in
+        Network.request(.test).cache(true).cacheData(completion: { [weak self] (responseVale) in
             guard let strongSelf = self else { return }
             strongSelf.deserializeData(responseVale: responseVale)
         }).responseData { [weak self] (responseVale) in
@@ -23,48 +23,46 @@ class ViewController: UIViewController {
         }
         
         //示例二 data
-        Network.request("===", params: nil, cacheFilters: nil).cache(true).responseCacheAndData { [weak self] (responseData) in
+        Network.request(.test, params: nil, cacheFilters: nil).cache(true).responseCacheAndData { [weak self] (responseData) in
             guard let strongSelf = self else { return }
             strongSelf.deserializeData(responseVale: responseData)
         }
 
         //示例三 str
-        Network.request("===", params: nil, cacheFilters: nil).cache(true).responseString { [weak self] (responseStr) in
+        Network.request(.test, params: nil, cacheFilters: nil).cache(true).responseString { [weak self] (responseStr) in
             guard let strongSelf = self else { return }
             strongSelf.deserializeData(responseVale: responseStr)
         }
         
         //示例四 json
-        Network.request("===").responseJson { [weak self] (responseJson) in
+        Network.request(.test).responseJson { [weak self] (responseJson) in
             guard let strongSelf = self else { return }
             strongSelf.deserializeData(responseVale: responseJson)
         }
         
         //下载 data
-        Network.download("===").downloadProgress { (precent) in
+        Network.download(.test).downloadProgress { (precent) in
             debugPrint("====download 进度===\(precent)")
             }.responseData { [weak self] (responseData) in
                 guard let strongSelf = self else { return }
                 strongSelf.deserializeData(responseVale: responseData)
         }
         
+        // upload image
         if let uploadImg = UIImage.init(named: "==") {
             let payload = Network.Payload.init(content: Network.Content.jpeg(uploadImg, 1.0), name: "files[]", mimeType: .jpeg)
-            Network.upload(payload, url: "url").uploadProgress { (precent) in
+            Network.upload(payload, api: .test).uploadProgress { (precent) in
                 debugPrint("====upload 进度===\(precent)")
                 }.responseData { [weak self] (responseData) in
                     guard let strongSelf = self else { return }
                     strongSelf.deserializeData(responseVale: responseData)
             }
         }
-        
-        
-        
     }
     
     
+    // parse
     func deserializeData<T>(responseVale: ResponseValue<T>)  {
-
         let isCache = responseVale.isCacheData
         debugPrint("===isCache = \(isCache)")
         

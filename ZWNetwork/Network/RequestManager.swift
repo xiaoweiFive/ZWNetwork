@@ -35,12 +35,8 @@ class RequestManager {
         taskManager?.completionClosure = {
             self.requestTasks.removeValue(forKey: key)
         }
-        var tempParam = params==nil ? [:] : params!
-        let dynamicTempParam = cacheFilters==nil ? [:] : cacheFilters!
-        dynamicTempParam.forEach { (arg) in
-            tempParam[arg.key] = arg.value
-        }
-        taskManager?.request(url, method: method, params: tempParam, cacheKey: key, encoding: encoding, headers: headers)
+        
+        taskManager?.request(url, method: method, params: params, cacheKey: key, encoding: encoding, headers: headers)
         return taskManager!
     }
     
@@ -63,11 +59,6 @@ class RequestManager {
                     
                     taskManager?.completionClosure = {
                         self.requestTasks.removeValue(forKey: key)
-                    }
-                    var tempParam = params
-                    let dynamicTempParam = cacheFilters==nil ? [:] : cacheFilters!
-                    dynamicTempParam.forEach { (arg) in
-                        tempParam[arg.key] = arg.value
                     }
                     taskManager?.request(urlRequest: urlRequest, cacheKey: key)
                     return taskManager!

@@ -31,7 +31,7 @@ class Network: NSObject {
     /// - Returns:
     @discardableResult
     public static func request(
-        _ url: String,
+        _ api: Api,
         method: HTTPMethod = .get,
         params: Parameters? = nil,
         cacheFilters: Parameters? = nil,
@@ -39,7 +39,7 @@ class Network: NSObject {
         headers: HTTPHeaders? = nil)
         -> RequestTaskManager
     {
-        return RequestManager.default.request(url, method: method, params: params, cacheFilters: cacheFilters, encoding: encoding, headers: headers)
+        return RequestManager.default.request(api.url, method: method, params: params, cacheFilters: cacheFilters, encoding: encoding, headers: headers)
     }
     
     /// urlRequest请求
@@ -65,8 +65,8 @@ class Network: NSObject {
     ///   - url: url
     ///   - params: 参数
     ///   - cacheFilters: 变化的参数，例如 时间戳-token 等
-    public static func cancel(_ url: String, params: Parameters? = nil, cacheFilters: Parameters? = nil) {
-        RequestManager.default.cancel(url, params: params, cacheFilters: cacheFilters)
+    public static func cancel(_ api: Api, params: Parameters? = nil, cacheFilters: Parameters? = nil) {
+        RequestManager.default.cancel(api.url, params: params, cacheFilters: cacheFilters)
     }
     
     /// 清除所有缓存
@@ -83,8 +83,8 @@ class Network: NSObject {
     ///   - params: 参数
     ///   - cacheFilters: 变化的参数，例如 时间戳-token 等
     ///   - completion: 完成回调
-    public static func removeObjectCache(_ url: String, params: [String: Any]? = nil, cacheFilters: Parameters? = nil, completion: @escaping (Bool)->()) {
-        RequestManager.default.removeObjectCache(url, params: params,cacheFilters: cacheFilters, completion: completion)
+    public static func removeObjectCache(_ api: Api, params: [String: Any]? = nil, cacheFilters: Parameters? = nil, completion: @escaping (Bool)->()) {
+        RequestManager.default.removeObjectCache(api.url, params: params,cacheFilters: cacheFilters, completion: completion)
     }
     
     // MARK: - 下载
@@ -101,7 +101,7 @@ class Network: NSObject {
     ///   - fileName: 自定义文件名，需要带文件扩展名
     /// - Returns: DownloadTaskManager
     public static func download(
-        _ url: String,
+        _ api: Api,
         method: HTTPMethod = .get,
         parameters: Parameters? = nil,
         cacheFilters: Parameters? = nil,
@@ -110,14 +110,14 @@ class Network: NSObject {
         fileName: String? = nil)
         ->DownloadTaskManager
     {
-        return DownloadManager.default.download(url, method: method, parameters: parameters, cacheFilters: cacheFilters, encoding: encoding, headers: headers, fileName: fileName)
+        return DownloadManager.default.download(api.url, method: method, parameters: parameters, cacheFilters: cacheFilters, encoding: encoding, headers: headers, fileName: fileName)
     }
     
     /// 取消下载
     ///
     /// - Parameter url: url
-    public static func downloadCancel(_ url: String, parameters: Parameters? = nil, cacheFilters: Parameters? = nil) {
-        DownloadManager.default.cancel(url, parameters: parameters, cacheFilters: cacheFilters)
+    public static func downloadCancel(_ api: Api, parameters: Parameters? = nil, cacheFilters: Parameters? = nil) {
+        DownloadManager.default.cancel(api.url, parameters: parameters, cacheFilters: cacheFilters)
     }
     
     /// Cancel all download tasks
@@ -129,8 +129,8 @@ class Network: NSObject {
     ///
     /// - Parameter url: url
     /// - Returns: percent
-    public static func downloadPercent(_ url: String, parameters: Parameters? = nil, cacheFilters: Parameters? = nil) -> Double {
-        return DownloadManager.default.downloadPercent(url, parameters: parameters, cacheFilters: cacheFilters)
+    public static func downloadPercent(_ api: Api, parameters: Parameters? = nil, cacheFilters: Parameters? = nil) -> Double {
+        return DownloadManager.default.downloadPercent(api.url, parameters: parameters, cacheFilters: cacheFilters)
     }
     
     /// 删除某个下载
@@ -138,24 +138,24 @@ class Network: NSObject {
     /// - Parameters:
     ///   - url: url
     ///   - completion: download success/failure
-    public static func downloadDelete(_ url: String, parameters: Parameters? = nil,cacheFilters: Parameters? = nil, completion: @escaping (Bool)->()) {
-        DownloadManager.default.delete(url,parameters: parameters,cacheFilters: cacheFilters, completion: completion)
+    public static func downloadDelete(_ api: Api, parameters: Parameters? = nil,cacheFilters: Parameters? = nil, completion: @escaping (Bool)->()) {
+        DownloadManager.default.delete(api.url, parameters: parameters,cacheFilters: cacheFilters, completion: completion)
     }
     
     /// 下载状态
     ///
     /// - Parameter url: url
     /// - Returns: status
-    public static func downloadStatus(_ url: String, parameters: Parameters? = nil,cacheFilters: Parameters? = nil) -> DownloadStatus {
-        return DownloadManager.default.downloadStatus(url, parameters: parameters,cacheFilters: cacheFilters)
+    public static func downloadStatus(_ api: Api, parameters: Parameters? = nil,cacheFilters: Parameters? = nil) -> DownloadStatus {
+        return DownloadManager.default.downloadStatus(api.url, parameters: parameters,cacheFilters: cacheFilters)
     }
     
     /// 下载完成后，文件所在位置
     ///
     /// - Parameter url: url
     /// - Returns: file URL
-    public static func downloadFilePath(_ url: String, parameters: Parameters? = nil,cacheFilters: Parameters? = nil) -> URL? {
-        return DownloadManager.default.downloadFilePath(url, parameters: parameters,cacheFilters: cacheFilters)
+    public static func downloadFilePath(_ api: Api, parameters: Parameters? = nil,cacheFilters: Parameters? = nil) -> URL? {
+        return DownloadManager.default.downloadFilePath(api.url, parameters: parameters,cacheFilters: cacheFilters)
     }
     
     /// 下载中的进度,任务下载中时，退出当前页面,再次进入时继续下载
@@ -165,8 +165,8 @@ class Network: NSObject {
     ///   - progress: 进度
     /// - Returns: taskManager
     @discardableResult
-    public static func downloadProgress(_ url: String, parameters: Parameters? = nil,cacheFilters: Parameters? = nil, progress: @escaping ((Double)->())) -> DownloadTaskManager? {
-        return DownloadManager.default.downloadProgress(url, parameters: parameters,cacheFilters: cacheFilters, progress: progress)
+    public static func downloadProgress(_ api: Api, parameters: Parameters? = nil,cacheFilters: Parameters? = nil, progress: @escaping ((Double)->())) -> DownloadTaskManager? {
+        return DownloadManager.default.downloadProgress(api.url, parameters: parameters,cacheFilters: cacheFilters, progress: progress)
     }
 
     
@@ -185,20 +185,20 @@ class Network: NSObject {
     /// - Returns: DownloadTaskManager
     @discardableResult
     public static func upload(_ payloads: Payload...,
-        url: String,
+        api: Api,
         parameters: Parameters? = nil,
         cacheFilters: Parameters? = nil,
         encoding: ParameterEncoding = URLEncoding.default,
         headers: HTTPHeaders? = nil) -> UploadTaskManager
     {
-       return UploadManager.default.upload(payloads, url: url, parameters: parameters)
+       return UploadManager.default.upload(payloads, url: api.url, parameters: parameters)
     }
     
     /// 取消上传
     ///
     /// - Parameter url: url
-    public static func uploadCancel(_ url: String, parameters: Parameters? = nil, cacheFilters: Parameters? = nil) {
-        UploadManager.default.cancel(url, parameters: parameters, cacheFilters: cacheFilters)
+    public static func uploadCancel(_ api: Api, parameters: Parameters? = nil, cacheFilters: Parameters? = nil) {
+        UploadManager.default.cancel(api.url, parameters: parameters, cacheFilters: cacheFilters)
     }
     
     /// Cancel all upload tasks
@@ -210,8 +210,8 @@ class Network: NSObject {
     ///
     /// - Parameter url: url
     /// - Returns: percent
-    public static func uploadPercent(_ url: String, parameters: Parameters? = nil, cacheFilters: Parameters? = nil) -> Double {
-        return UploadManager.default.uploadPercent(url, parameters: parameters, cacheFilters: cacheFilters)
+    public static func uploadPercent(_ api: Api, parameters: Parameters? = nil, cacheFilters: Parameters? = nil) -> Double {
+        return UploadManager.default.uploadPercent(api.url, parameters: parameters, cacheFilters: cacheFilters)
     }
     
     /// 删除某个上传
@@ -219,16 +219,16 @@ class Network: NSObject {
     /// - Parameters:
     ///   - url: url
     ///   - completion: upload success/failure
-    public static func uploadDelete(_ url: String, parameters: Parameters? = nil,cacheFilters: Parameters? = nil, completion: @escaping (Bool)->()) {
-        UploadManager.default.delete(url,parameters: parameters,cacheFilters: cacheFilters, completion: completion)
+    public static func uploadDelete(_ api: Api, parameters: Parameters? = nil,cacheFilters: Parameters? = nil, completion: @escaping (Bool)->()) {
+        UploadManager.default.delete(api.url, parameters: parameters,cacheFilters: cacheFilters, completion: completion)
     }
     
     /// 上传状态
     ///
     /// - Parameter url: url
     /// - Returns: status
-    public static func uploadStatus(_ url: String, parameters: Parameters? = nil,cacheFilters: Parameters? = nil) -> UploadStatus {
-        return UploadManager.default.uploadStatus(url, parameters: parameters,cacheFilters: cacheFilters)
+    public static func uploadStatus(_ api: Api, parameters: Parameters? = nil,cacheFilters: Parameters? = nil) -> UploadStatus {
+        return UploadManager.default.uploadStatus(api.url, parameters: parameters,cacheFilters: cacheFilters)
     }
     
     /// 上传中的进度,任务上传中时，退出当前页面,再次进入时继续上传
@@ -238,13 +238,14 @@ class Network: NSObject {
     ///   - progress: 进度
     /// - Returns: taskManager
     @discardableResult
-    public static func uploadProgress(_ url: String, parameters: Parameters? = nil,cacheFilters: Parameters? = nil, progress: @escaping ((Double)->())) -> UploadTaskManager? {
-        return UploadManager.default.uploadProgress(url, parameters: parameters,cacheFilters: cacheFilters, progress: progress)
+    public static func uploadProgress(_ api: Api, parameters: Parameters? = nil,cacheFilters: Parameters? = nil, progress: @escaping ((Double)->())) -> UploadTaskManager? {
+        return UploadManager.default.uploadProgress(api.url, parameters: parameters,cacheFilters: cacheFilters, progress: progress)
     }
     
 }
 
 
+// MARK: - upload type
 
 extension Network{
 
@@ -278,12 +279,3 @@ extension Network{
         case mp3    = "audio/mpeg"
     }
 }
-
-public func makeUUID() -> String {
-    return NSUUID().uuidString
-}
-
-public func makeShortUUID() -> String {
-    return String(makeUUID().suffix(8))
-}
-
