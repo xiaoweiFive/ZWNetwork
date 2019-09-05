@@ -1,0 +1,13 @@
+
+platform :ios, '10.0'
+
+use_frameworks!
+
+target 'ZWNetwork' do
+
+pod 'Alamofire' 
+pod 'Cache' 
+pod 'DeviceKit'
+pod 'HandyJSON'
+
+end

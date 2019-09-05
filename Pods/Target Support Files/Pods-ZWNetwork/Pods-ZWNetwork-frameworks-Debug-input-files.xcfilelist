@@ -1,0 +1,5 @@
+${PODS_ROOT}/Target Support Files/Pods-ZWNetwork/Pods-ZWNetwork-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/Cache/Cache.framework
+${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework
+${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework
